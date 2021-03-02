@@ -5,7 +5,7 @@ const usersSchema = mongoose.Schema({
     nume: String,
     prenume:String,
     email:String,
-    telefon:Number
+    telefon:String
 })
 
 module.exports = mongoose.model(CONSTANTS.DATABASE.COLLECTIONS.USERS, usersSchema)

@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 const CONSTANTS = require('../../utils/constants')
 
 const usersSchema = mongoose.Schema({
-    nume: String,
-    prenume:String,
+    name: String,
+    surename:String,
     email:String,
-    telefon:String
+    phone:String
 })
 
 module.exports = mongoose.model(CONSTANTS.DATABASE.COLLECTIONS.USERS, usersSchema)

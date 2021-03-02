@@ -8,4 +8,4 @@ const usersSchema = mongoose.Schema({
     telefon:Number
 })
 
-module.exports = mongoose.model(CONSTANTS.DATABASE.COLLECTIONS.ADMIN, usersSchema)
+module.exports = mongoose.model(CONSTANTS.DATABASE.COLLECTIONS.USERS, usersSchema)

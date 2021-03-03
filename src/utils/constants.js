@@ -1,8 +1,10 @@
+
 module.exports = {
     PORT: 9000,
     DATABASE: {
         COLLECTIONS:{
-            USERS: 'users'
+            USERS: 'users',
+            ENTRIES: 'entries'
         },
         URL: 'mongodb://localhost/usersdb'
     },

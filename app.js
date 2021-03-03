@@ -9,7 +9,7 @@ const CONSTANTS = require('./src/utils/constants')
 const connection = require('./src/database/connection')
 const cors = require('cors')
 
-const usersRouter = require('./src/api/users/routes')
+const usersRouter = require('./src/api/users/router')
 
 const app = express();
 

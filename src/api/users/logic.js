@@ -8,5 +8,6 @@ module.exports = {
         const hash = bcrypt.hashSync(user.password, SALT_ROUNDS)
         user.password = hash 
         return database.create(user)
-    }
+    },
+    getById: id => database.getById(id)
 }

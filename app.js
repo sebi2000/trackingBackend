@@ -3,21 +3,24 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-//const indexRouter = require('./routes/index');
-//const usersRouter = require('./routes/users');
+const bodyParser = require('body-parser')
 
 const CONSTANTS = require('./src/utils/constants')
 const connection = require('./src/database/connection')
 const cors = require('cors')
 
+const usersRouter = require('./src/api/users/router')
+
 const app = express();
+
 
 connection().then( () => {
 
     app.use(logger('dev'))
     app.use(express.json())
     app.use(express.urlencoded({ extended: false }))
+    app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.json())
     app.use(cookieParser())
     app.use(express.static(path.join(__dirname, 'public')))
     app.use(cors({
@@ -25,12 +28,14 @@ connection().then( () => {
         credentials: true
      }))
 
-// catch 404 and forward to error handler
+   app.use('/users', usersRouter)
+     
+  // catch 404 and forward to error handler
     app.use(function(req, res, next) {
       next(createError(404))
     })
 
-// error handler
+  // error handler
     app.use(function(err, req, res, next) {
   // set locals, only providing error in development
     res.locals.message = err.message
@@ -44,9 +49,10 @@ connection().then( () => {
 
     app.listen(CONSTANTS.PORT)
     console.log(`Listening to port ${CONSTANTS.PORT} and connected to database`)
+
   }).catch(err => {
-        console.log('Cannot connect to database', err)
-      })
+      console.log('Cannot connect to database', err)
+    })
 
 
 module.exports = app

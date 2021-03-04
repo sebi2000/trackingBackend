@@ -8,5 +8,6 @@ module.exports = {
         },
         URL: 'mongodb://localhost/usersdb'
     },
-    ORIGIN: 'http://localhost:3000'
+    ORIGIN: 'http://localhost:3000',
+    SALT_ROUNDS: 10
 }

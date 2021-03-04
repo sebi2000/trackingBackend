@@ -28,6 +28,15 @@ router.route('/:ID')
             res.send(err)
         })
     })
-    
+
+router.route('/:ID')
+    .put((req, res) => {
+        logic.update(req.params.ID, req.body).then(user => {
+            res.json(user)
+        }).catch(err => {
+            res.status(400)
+            res.send(err)
+        })
+    })
 
 module.exports = router

@@ -9,5 +9,6 @@ module.exports = {
         user.password = hash 
         return database.create(user)
     },
-    getById: id => database.getById(id)
+    getById: id => database.getById(id),
+    update: (id, user) => database.update(id, user)
 }

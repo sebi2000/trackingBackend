@@ -21,7 +21,6 @@ router.route('/')
 
 router.route('/:ID')
     .get((req,res) => {
-        console.log(req.params.ID)
         logic.getById(req.params.ID).then(user => {
             res.json(user)
         }).catch(err => {

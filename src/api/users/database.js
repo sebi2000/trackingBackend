@@ -7,5 +7,5 @@ module.exports = {
     //getById: id => users.findById(id).lean().exec(),
     //update: (id,user) => users.findByIdAndUpdate(id,user).lean().exec(),
     //delete: id => users.findByIdAndDelete(id).lean().exec(),
-    create: user => users.create(user)
+    create: user => users.create(user) 
 }

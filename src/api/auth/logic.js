@@ -2,10 +2,12 @@ const database = require ('../users/database')
 const bcrypt = require('bcrypt')
 
 module.exports = {
-    validatePass: (passwordSent, passwordUser) => {
-        if(bcrypt.compareSync(passwordSent, passwordUser))
+    login : async user => {
+        const userFound = await database.getByName(user.name)
+        if( userFound === null )
+            return "User not found"
+        else if(bcrypt.compareSync(user.password, userFound.password))
             return "Authentication was successful"
-        return "Password is incorrect"
-    },
-    getByName: user => database.getByName(user.name)  
+        else return "Password is incorrect"
+    }
 }

@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const logic = require('./logic')
-const bcrypt = require('bcrypt')
 
 router.route('/')
     .post((req, res) =>{ 
@@ -28,8 +27,6 @@ router.route('/:ID')
             res.send(err)
         })
     })
-
-router.route('/:ID')
     .put((req, res) => {
         logic.update(req.params.ID, req.body).then(user => {
             res.json(user)

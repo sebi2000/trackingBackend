@@ -10,6 +10,7 @@ const connection = require('./src/database/connection')
 const cors = require('cors')
 
 const usersRouter = require('./src/api/users/router')
+const authRouter = require('./src/api/auth/router')
 
 const app = express();
 
@@ -29,6 +30,7 @@ connection().then( () => {
      }))
 
    app.use('/users', usersRouter)
+   app.use('/auth', authRouter)
      
   // catch 404 and forward to error handler
     app.use(function(req, res, next) {

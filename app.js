@@ -11,6 +11,7 @@ const cors = require('cors')
 
 const usersRouter = require('./src/api/users/router')
 const authRouter = require('./src/api/auth/router')
+const entriesRouter = require('./src/api/entries/router')
 
 const app = express();
 
@@ -28,9 +29,13 @@ connection().then( () => {
         origin: CONSTANTS.ORIGIN,
         credentials: true
      }))
-
+  
    app.use('/users', usersRouter)
    app.use('/auth', authRouter)
+   app.use('/entries', entriesRouter)
+  //  app.use('/', function(req, res) {
+  //    res.send('working')
+  //  })
      
   // catch 404 and forward to error handler
     app.use(function(req, res, next) {

@@ -1,7 +1,17 @@
 const database = require ('../users/database')
 const bcrypt = require('bcrypt')
-const { MESSAGES: { USER_NOT_FOUND, AUTH_SUCCESS, INCORRECT_PASS } , CODES :{ ACCESS, FORBIDDEN } } = require('../../utils/constants')
+const { MESSAGES: { USER_NOT_FOUND, AUTH_SUCCESS, INCORRECT_PASS } } = require('../../utils/constants')
 const Helpers = require('../../utils/helpers')
+let error = { 
+    status: "",
+    code: ""
+}
+
+function handleError (status, code) {
+    error.status = status
+    error.code = code
+    return error
+}
 
 module.exports = {
     login : async user => {

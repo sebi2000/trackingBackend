@@ -5,5 +5,6 @@ module.exports = {
     getById: id => users.findById(id).lean().exec(),
     update: (id,user) => users.findByIdAndUpdate(id,user).lean().exec(),
     create: user =>users.create(user),
-    getByName: name => users.findOne({ name: name }).lean().exec()
+    getByName: name => users.findOne({ name: name }).lean().exec(),
+    getByEmail: email => users.findOne({ email: email}).lean().exec()
 }

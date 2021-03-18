@@ -4,7 +4,7 @@ const logic = require('./logic')
 
 router.route('/')
     .post((req, res) => {
-        logic.login(req.body).then(resp => {
+        logic.login(req.body.user).then(resp => {
             res.send(resp)
         })
         .catch(err =>{

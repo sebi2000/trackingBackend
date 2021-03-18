@@ -4,8 +4,8 @@ const logic = require('./logic')
 
 router.route('/')
     .post((req, res) =>{ 
-        logic.create(req.body).then(users => {
-            res.json(users)      
+        logic.create(req.body).then(user => {
+            res.json(user)   
         }).catch(err => {
             res.send(err)
         })  
@@ -13,7 +13,7 @@ router.route('/')
     .get((req,res) => {
         logic.getAll().then(users => {
             res.json(users)
-        }) .catch(err => {
+        }).catch(err => {
             res.send(err)
         })
     })

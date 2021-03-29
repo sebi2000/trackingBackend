@@ -12,8 +12,8 @@ router.route('/')
     })
 
     .get((req, res) => {
-        logic.getAll().then(entries => {
-            res.json(entries)
+        logic.getAll(req.query.page, req.query.rows).then(response => {
+            res.json(response)
         }).catch(err => {
             res.send(err)
         })

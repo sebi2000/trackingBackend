@@ -1,6 +1,6 @@
 const database = require('./database')
 
 module.exports = {
-    getAll: () => database.getAll(),
+    getAll: (page, rows) => Promise.all([database.getAll(page, rows), database.count()]),
     create: entry => database.create(entry)
 }

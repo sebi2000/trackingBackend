@@ -15,7 +15,7 @@ module.exports = {
         INCORRECT_PASS : 'Incorrect Password'
     },
     CODES: {
-        ACCESS: 202,
+        ACCESS: 200,
         FORBIDDEN : 403
     }
 }

@@ -19,7 +19,7 @@ router.route('/')
     })
 
     .get((req, res) => {
-        logic.getAll(req.query.page, req.query.rows).then(response => {
+        logic.getAll(req.query.page, req.query.rows, req.query.start, req.query.end).then(response => {
             res.json(response)
         }).catch(err => {
             res.send(err)

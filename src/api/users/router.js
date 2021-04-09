@@ -1,10 +1,17 @@
 const express = require('express')
 const router = express.Router()
 const logic = require('./logic')
+const { validationResult } = require('express-validator')
+const { checkRegister } = require('../../utils/validation/users')
+const Helpers = require('../../utils/helpers')
+const { StatusCodes } = require('http-status-codes')
 
 router.route('/')
-    .post((req, res) =>{ 
-        logic.create(req.body).then(user => {
+    .post(checkRegister, (req, res) =>{
+        const errors = validationResult(req)
+        if(!errors.isEmpty())
+            res.json(Helpers.handleResponse(errors, StatusCodes.UNPROCESSABLE_ENTITY))
+        else logic.create(req.body.user).then(user => {
             res.json(user)   
         }).catch(err => {
             res.send(err)

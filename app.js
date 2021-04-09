@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser')
+const session = require('express-session');
 
 const CONSTANTS = require('./src/utils/constants')
 const connection = require('./src/database/connection')
@@ -14,7 +15,6 @@ const authRouter = require('./src/api/auth/router')
 const entriesRouter = require('./src/api/entries/router')
 
 const app = express();
-
 
 connection().then( () => {
 
@@ -28,13 +28,26 @@ connection().then( () => {
         credentials: true
      }))
   
-   app.use('/users', usersRouter)
-   app.use('/auth', authRouter)
-   app.use('/entries', entriesRouter)
-   
-    app.use(function(req, res, next) {
+  app.use(session ({
+    secret: 'maresecret',
+  }))
+
+  app.use('/users', usersRouter)
+  app.use('/auth', authRouter)
+  app.use('/entries', entriesRouter)
+
+  app.use('/isLogged', (req, res) => {
+    res.send(req.session.user)
+  })
+
+  app.use('/logout', (req, res) => {
+    req.session.destroy()
+    res.send("Logged out")
+  })
+ 
+  app.use(function(req, res, next) {
       next(createError(404))
-    })
+  })
 
   // error handler
     app.use(function(err, req, res, next) {

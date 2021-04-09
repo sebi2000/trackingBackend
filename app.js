@@ -32,15 +32,15 @@ connection().then( () => {
     secret: 'maresecret',
   }))
 
-  app.use('/api/users', usersRouter)
-  app.use('/api/auth', authRouter)
-  app.use('/api/entries', entriesRouter)
+  app.use('/users', usersRouter)
+  app.use('/auth', authRouter)
+  app.use('/entries', entriesRouter)
 
-  app.use('/api/isLogged', (req, res) => {
+  app.use('/isLogged', (req, res) => {
     res.send(req.session.user)
   })
 
-  app.use('/api/logout', (req, res) => {
+  app.use('/logout', (req, res) => {
     req.session.destroy()
     res.send("Logged out")
   })

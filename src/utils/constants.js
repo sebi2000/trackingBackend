@@ -5,9 +5,9 @@ module.exports = {
             USERS: 'users',
             ENTRIES: 'entries'
         },
-        URL: 'mongodb://frontdesk-db:27017/usersdb'
+        URL: 'mongodb://localhost:27017/usersdb'
     },
-    ORIGIN: 'http://localhost',
+    ORIGIN: 'http://localhost:3000',
     SALT_ROUNDS: 10,
     MESSAGES: {
         USER_NOT_FOUND: 'User not found',

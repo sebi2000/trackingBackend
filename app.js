@@ -37,6 +37,7 @@ connection().then( () => {
   app.use('/entries', entriesRouter)
 
   app.use('/isLogged', (req, res) => {
+    console.log("HEHEHEHHEH")
     res.send(req.session.user)
   })
 

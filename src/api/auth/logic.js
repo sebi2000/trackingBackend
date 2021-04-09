@@ -10,7 +10,7 @@ module.exports = {
             return Helpers.handleResponse(USER_NOT_FOUND, FORBIDDEN)
         }
         else if(bcrypt.compareSync(user.password, userFound.password)){
-            return Helpers.handleResponse(AUTH_SUCCESS, ACCESS) 
+            return Helpers.handleResponse(AUTH_SUCCESS, ACCESS)
         }  
         else{
             return Helpers.handleResponse(INCORRECT_PASS, FORBIDDEN)

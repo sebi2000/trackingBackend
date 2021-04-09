@@ -32,16 +32,15 @@ connection().then( () => {
     secret: 'maresecret',
   }))
 
-  app.use('/users', usersRouter)
-  app.use('/auth', authRouter)
-  app.use('/entries', entriesRouter)
+  app.use('/api/users', usersRouter)
+  app.use('/api/auth', authRouter)
+  app.use('/api/entries', entriesRouter)
 
-  app.use('/isLogged', (req, res) => {
-    console.log("HEHEHEHHEH")
+  app.use('/api/isLogged', (req, res) => {
     res.send(req.session.user)
   })
 
-  app.use('/logout', (req, res) => {
+  app.use('/api/logout', (req, res) => {
     req.session.destroy()
     res.send("Logged out")
   })
@@ -58,7 +57,7 @@ connection().then( () => {
 
   // render the error page
       res.status(err.status || 500);
-      res.render('error')
+      res.send('error')
     })
 
 

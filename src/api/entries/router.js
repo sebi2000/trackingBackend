@@ -25,5 +25,12 @@ router.route('/')
             res.send(err)
         })
     })
+
+router.route('/:ID')
+    .delete((req, res) =>{
+        logic.delete(req.params.ID).then(entry =>{
+            res.send(entry)
+        })
+    })
     
 module.exports = router

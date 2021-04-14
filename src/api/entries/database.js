@@ -1,3 +1,4 @@
+const { findByIdAndDelete } = require('../../database/models/entries')
 const entries = require('../../database/models/entries')
 
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
             $gte: start,
             $lte : end
         }
-    }).count()
+    }).count(),
+    delete: id => entries.findByIdAndDelete(id).lean().exec()
 }

@@ -15,5 +15,6 @@ module.exports = {
             $lte : end
         }
     }).count(),
+    update: (id, newEntry) => entries.findByIdAndUpdate(id, newEntry),
     delete: id => entries.findByIdAndDelete(id).lean().exec()
 }

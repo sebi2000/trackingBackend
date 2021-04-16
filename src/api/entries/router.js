@@ -32,5 +32,10 @@ router.route('/:ID')
             res.send(entry)
         })
     })
+    .put((req, res) =>{
+        logic.update(req.params.ID, req.body).then(entry =>{
+            res.send(entry)
+         })
+    })
     
 module.exports = router

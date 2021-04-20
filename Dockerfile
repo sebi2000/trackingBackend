@@ -9,6 +9,7 @@ WORKDIR /api
 COPY package*.json /api/
 
 RUN npm install
+RUN npm install -g --save nodemon
 # If you are building your code for production
 # RUN npm ci --only=production
 
@@ -16,4 +17,4 @@ RUN npm install
 COPY . /api/
 
 EXPOSE 9000
-CMD [ "node", "app.js" ]
+CMD [ "nodemon", "app.js" ]

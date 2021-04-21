@@ -11,8 +11,8 @@ router.route('/')
         const errors = validationResult(req)
         if(!errors.isEmpty())
             res.json(Helpers.handleResponse(errors, StatusCodes.UNPROCESSABLE_ENTITY))
-        else logic.create(req.body.entries).then(entries => {
-            res.json(entries)
+        else logic.create(req.body.entry).then(entry => {
+            res.json(entry)
         }).catch(err => {
             res.send(err)
         })

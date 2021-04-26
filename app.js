@@ -13,6 +13,7 @@ const cors = require('cors')
 const usersRouter = require('./src/api/users/router')
 const authRouter = require('./src/api/auth/router')
 const entriesRouter = require('./src/api/entries/router')
+const resetRouter = require('./src/api/reset/router')
 
 const app = express();
 
@@ -32,9 +33,12 @@ connection().then( () => {
     secret: 'maresecret',
   }))
 
-  app.use('/users', usersRouter)
+
+  app.use('/reset', resetRouter)
   app.use('/auth', authRouter)
+  app.use('/users', usersRouter)
   app.use('/entries', entriesRouter)
+
 
   app.use('/isLogged', (req, res) => {
     res.send(req.session.user)
@@ -57,7 +61,7 @@ connection().then( () => {
 
   // render the error page
       res.status(err.status || 500);
-      res.send('error')
+      res.send(err)
     })
 
 

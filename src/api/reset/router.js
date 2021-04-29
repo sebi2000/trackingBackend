@@ -10,7 +10,6 @@ router.route('/')
     })
 router.route('/:TOKEN')
     .get((req, res) => {
-        console.log("TOKEN:", req.params.TOKEN)
         logic.verifyToken(req.params.TOKEN).then(resp => {
             res.json(resp)
         })

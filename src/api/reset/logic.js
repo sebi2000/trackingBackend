@@ -32,7 +32,6 @@ module.exports = {
         from: '"Fred Foo 👻" <foo@example.com>',
         to: email, 
         subject: "Hello ✔",
-        text: "Pentru a reseta parola apasati pe acest link", 
         html: `Pentru a reseta parola apasati pe acest <a href='http://localhost:3000/reset/${token}/${findUser._id}'>link</a>`, 
       });
 

@@ -17,5 +17,6 @@ module.exports = {
     CODES: {
         ACCESS: 200,
         FORBIDDEN : 403
-    }
+    },
+    EXP_TIME: '1h'
 }

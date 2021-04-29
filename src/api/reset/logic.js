@@ -26,7 +26,7 @@ module.exports = {
       let token = jwt.sign({
         email: email,
         id: findUser._id
-      }, 'secret', { expiresIn: EXP_TIME });
+      }, 'secret', { expiresIn: CONSTANTS.EXP_TIME });
   
       let info = await transporter.sendMail({
         from: '"Fred Foo 👻" <foo@example.com>',

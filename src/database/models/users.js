@@ -6,7 +6,8 @@ const usersSchema = mongoose.Schema({
     surname:String,
     email:String,
     phone:String,
-    password: String
+    password: String,
+    role: String
 })
 
 module.exports = mongoose.model(CONSTANTS.DATABASE.COLLECTIONS.USERS, usersSchema)

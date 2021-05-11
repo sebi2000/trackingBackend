@@ -11,7 +11,7 @@ module.exports = {
             return Helpers.handleResponse(USER_NOT_FOUND, StatusCodes.FORBIDDEN)
         }
         else if(bcrypt.compareSync(user.password, userFound.password)){
-            return Helpers.handleResponse(AUTH_SUCCESS, StatusCodes.OK)
+            return {userFound} 
         }  
         else{
             return Helpers.handleResponse(INCORRECT_PASS, StatusCodes.FORBIDDEN)

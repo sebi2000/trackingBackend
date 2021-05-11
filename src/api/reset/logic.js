@@ -4,6 +4,7 @@ const database = require('../../api/users/database')
 const {StatusCodes} = require('http-status-codes')
 const Helpers = require('../../utils/helpers')
 const CONSTANTS = require('../../utils/constants')
+const { createTransporter } = require('../../utils/services')
 
 module.exports = {
     sendEmail : async email => {
@@ -13,15 +14,7 @@ module.exports = {
       if(findUser === null)
         return Helpers.handleResponse(CONSTANTS.MESSAGES.USER_NOT_FOUND, StatusCodes.FORBIDDEN)
 
-      let transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, 
-        auth: {
-          user: 'mdduperjalbtlv65@ethereal.email',
-          pass: 'AjPmqn2AQXRGzWd4eM', 
-        },
-      });
+      let transporter = createTransporter()
 
       let token = jwt.sign({
         email: email,

@@ -8,6 +8,7 @@ module.exports = {
             $lte : end
         }
     }).skip(parseInt(page)*parseInt(rows)).limit(parseInt(rows)).lean().exec(),
+    getAllByDate: date => entries.find({date: { $gte: date }}).lean().exec(),
     create: entry => entries.create(entry),
     count: (start, end) => entries.find({
         date: {

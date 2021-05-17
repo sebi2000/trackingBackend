@@ -4,7 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser')
-const session = require('express-session');
+const session = require('express-session')
+const CronJob = require('cron').CronJob
+const {sendEmailToAdmin} = require('./src/utils/services')
 
 const CONSTANTS = require('./src/utils/constants')
 const connection = require('./src/database/connection')
@@ -33,11 +35,15 @@ connection().then( () => {
     secret: 'maresecret',
   }))
 
-
   app.use('/reset', resetRouter)
   app.use('/auth', authRouter)
   app.use('/users', usersRouter)
   app.use('/entries', entriesRouter)
+
+  var job = new CronJob('0 0 13 * * *', function() {
+    sendEmailToAdmin()
+  }, null, true, 'Europe/Bucharest');
+  job.start();
 
 
   app.use('/isLogged', (req, res) => {

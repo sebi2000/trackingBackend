@@ -7,6 +7,12 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const CronJob = require('cron').CronJob
 const {sendEmailToAdmin} = require('./src/utils/services')
+const session = require('express-session');
+
+const jwt = require('jsonwebtoken')
+const { getById } = require('./src/api/users/logic')
+
+const {authHandler} = require('./src/utils/middlewares')
 
 const CONSTANTS = require('./src/utils/constants')
 const connection = require('./src/database/connection')
@@ -35,8 +41,9 @@ connection().then( () => {
     secret: 'maresecret',
   }))
 
-  app.use('/reset', resetRouter)
   app.use('/auth', authRouter)
+  app.use(authHandler)
+  app.use('/reset', resetRouter)
   app.use('/users', usersRouter)
   app.use('/entries', entriesRouter)
 
@@ -47,14 +54,15 @@ connection().then( () => {
 
 
   app.use('/isLogged', (req, res) => {
-    res.send(req.session.user)
+    res.send(req.auth)
   })
 
   app.use('/logout', (req, res) => {
-    req.session.destroy()
-    res.send("Logged out")
+    delete req.auth
+    res.send("Log out")
+
   })
- 
+
   app.use(function(req, res, next) {
       next(createError(404))
   })
@@ -69,7 +77,6 @@ connection().then( () => {
       res.status(err.status || 500);
       res.send(err)
     })
-
 
     app.listen(CONSTANTS.PORT)
     console.log(`Listening to port ${CONSTANTS.PORT} and connected to database`)

@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer")
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 const database = require('../../api/users/database')
 const {StatusCodes} = require('http-status-codes')
 const Helpers = require('../../utils/helpers')

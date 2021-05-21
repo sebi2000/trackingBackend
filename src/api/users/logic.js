@@ -1,9 +1,11 @@
 const database = require('./database')
 const bcrypt = require('bcrypt')
 const { SALT_ROUNDS } = require('../../utils/constants')
-const { hashPass } = require('../../utils/helpers')
+const { hashPass, simpleHtmlTemplating } = require('../../utils/helpers')
 const { createTransporter } = require('../../utils/services')
 const generator = require('generate-password')
+const fs = require('fs')
+const path = require('path')
 
 module.exports = {
     getAll: () => database.getAll(),
@@ -18,11 +20,17 @@ module.exports = {
 
         let transporter = createTransporter()
 
-        let info = await transporter.sendMail({
-            from: '"Fred Foo 👻" <foo@example.com>', 
-            to: "bar@example.com, baz@example.com", 
-            subject: "Hello ✔", // Subject line
-            html: `Contul dumneavoastra este: <br> Email: ${user.email} <br> Password: ${password} <br> <b>Va puteti schimba parola daca doriti</b>`, 
+        let htmlContent = fs.readFileSync(path.join(__dirname, '..', '..', 'utils', 'html-templates', 'createAccount.html'))
+       
+        await transporter.sendMail({
+            from: 'Solvvo Info', 
+            to: user.email, 
+            subject: "[SOLVVO] Cont nou", // Subject line 
+            html: simpleHtmlTemplating(htmlContent.toString(),{
+                accountName:  user.name,
+                accountEmail: user.email,
+                accountPassword: password,
+            })
           });
           
         return database.create(user)

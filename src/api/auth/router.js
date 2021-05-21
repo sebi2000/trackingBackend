@@ -12,8 +12,6 @@ router.route('/')
         if(!errors.isEmpty())
             res.json(Helpers.handleResponse(errors, StatusCodes.UNPROCESSABLE_ENTITY))
         else logic.login(req.body.user).then(resp => {
-            if(resp.userFound)
-                req.session.user = req.body.user
             res.send(resp)
         })
         .catch(err =>{

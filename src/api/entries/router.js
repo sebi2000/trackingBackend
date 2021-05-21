@@ -12,7 +12,7 @@ router.route('/')
         if(!errors.isEmpty())
             res.json(Helpers.handleResponse(errors, StatusCodes.UNPROCESSABLE_ENTITY))
         else logic.create(req.body.entry).then(entry => {
-            res.json(entry)
+            res.json({entry})
         }).catch(err => {
             res.send(err)
         })

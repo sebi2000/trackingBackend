@@ -25,11 +25,17 @@ module.exports = {
         await transporter.sendMail({
             from: 'Solvvo Info', 
             to: user.email, 
-            subject: "[SOLVVO] Cont nou", // Subject line 
+            subject: "[SOLVVO] Cont nou", // Subject line ,
+            // attachments: [{
+            //     filename: 'helpdesk_logo.png',
+            //     path: path.join(__dirname, '..', '..', 'assets', 'weSolvvoLogoMotto.png'),
+            //     cid: 'uniqueLogoSrc'
+            // }],
             html: simpleHtmlTemplating(htmlContent.toString(),{
                 accountName:  user.name,
                 accountEmail: user.email,
                 accountPassword: password,
+                logoSrc: 'uniqueLogoSrc'
             })
           });
           

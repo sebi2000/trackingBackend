@@ -18,6 +18,7 @@ const usersRouter = require('./src/api/users/router')
 const authRouter = require('./src/api/auth/router')
 const entriesRouter = require('./src/api/entries/router')
 const resetRouter = require('./src/api/reset/router')
+const tabletRouter = require('./src/api/tablet/router')
 
 const app = express();
 
@@ -35,8 +36,9 @@ connection().then( () => {
 
   app.use('/auth', authRouter)
   app.use('/reset', resetRouter)
+  app.use('/tablet', tabletRouter)
+  app.use(authHandler)
   app.use('/entries', entriesRouter)
-  //app.use(authHandler)
   app.use('/isLogged', (req, res) => {
     res.send(req.auth)
   })
@@ -44,17 +46,16 @@ connection().then( () => {
 
   var job = new CronJob('0 0 18 * * *', function() {
     sendEmailToAdmin()
-  }, null, true, 'Europe/Bucharest');
-  job.start();
+  }, null, true, 'Europe/Bucharest')
+  job.start()
 
   app.use('/logout', (req, res) => {
     delete req.auth
     res.send("Log out")
-
   })
 
   app.use(function(req, res, next) {
-      next(createError(404))
+    next(createError(404))
   })
 
   // error handler

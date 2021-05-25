@@ -3,7 +3,7 @@ const database = require('../../api/users/database')
 const {StatusCodes} = require('http-status-codes')
 const Helpers = require('../../utils/helpers')
 const CONSTANTS = require('../../utils/constants')
-const { createTransporter, } = require('../../utils/services')
+const { createTransporter } = require('../../utils/services')
 const fs = require('fs')
 const path = require('path')
 

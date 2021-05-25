@@ -10,9 +10,9 @@ module.exports = {
     ORIGIN: 'http://localhost:3000',
     SALT_ROUNDS: 10,
     MESSAGES: {
-        USER_NOT_FOUND: "Utilizatorul nu a fost gasit",
+        USER_NOT_FOUND: "Utilizatorul nu a fost găsit",
         AUTH_SUCCESS: "Autentificare cu succes",
-        INCORRECT_PASS : "Parola incorecta"
+        INCORRECT_PASS : "Parolă incorectă"
     },
     CODES: {
         ACCESS: 200,

@@ -7,10 +7,6 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const CronJob = require('cron').CronJob
 const {sendEmailToAdmin} = require('./src/utils/services')
-const session = require('express-session');
-
-const jwt = require('jsonwebtoken')
-const { getById } = require('./src/api/users/logic')
 
 const {authHandler} = require('./src/utils/middlewares')
 
@@ -22,6 +18,7 @@ const usersRouter = require('./src/api/users/router')
 const authRouter = require('./src/api/auth/router')
 const entriesRouter = require('./src/api/entries/router')
 const resetRouter = require('./src/api/reset/router')
+const tabletRouter = require('./src/api/tablet/router')
 
 const app = express();
 
@@ -36,35 +33,29 @@ connection().then( () => {
         origin: CONSTANTS.ORIGIN,
         credentials: true
      }))
-  
-  app.use(session ({
-    secret: 'maresecret',
-  }))
 
   app.use('/auth', authRouter)
-  app.use(authHandler)
   app.use('/reset', resetRouter)
-  app.use('/users', usersRouter)
+  app.use('/tablet', tabletRouter)
+  app.use(authHandler)
   app.use('/entries', entriesRouter)
-
-  var job = new CronJob('0 0 13 * * *', function() {
-    sendEmailToAdmin()
-  }, null, true, 'Europe/Bucharest');
-  job.start();
-
-
   app.use('/isLogged', (req, res) => {
     res.send(req.auth)
   })
+  app.use('/users', usersRouter)
+
+  var job = new CronJob('0 0 18 * * *', function() {
+    sendEmailToAdmin()
+  }, null, true, 'Europe/Bucharest')
+  job.start()
 
   app.use('/logout', (req, res) => {
     delete req.auth
     res.send("Log out")
-
   })
 
   app.use(function(req, res, next) {
-      next(createError(404))
+    next(createError(404))
   })
 
   // error handler

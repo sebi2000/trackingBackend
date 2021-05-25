@@ -31,9 +31,9 @@ const sendEmailToAdmin = async () => {
       message = message + "</table>"
     
     let info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <foo@example.com>',
+        from: 'Solvvo Info',
         to: 'admin@yahoo.com', 
-        subject: "Hello ✔",
+        subject: "[SOLVVO] Intrări",
         html: message, 
       });
 }

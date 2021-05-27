@@ -22,23 +22,28 @@ module.exports = {
 
         let htmlContent = fs.readFileSync(path.join(__dirname, '..', '..', 'utils', 'html-templates', 'createAccount.html'))
        
-        await transporter.sendMail({
-            from: 'Solvvo Info', 
-            to: user.email, 
-            subject: "[SOLVVO] Cont nou", // Subject line ,
-            // attachments: [{
-            //     filename: 'helpdesk_logo.png',
-            //     path: path.join(__dirname, '..', '..', 'assets', 'weSolvvoLogoMotto.png'),
-            //     cid: 'uniqueLogoSrc'
-            // }],
-            html: simpleHtmlTemplating(htmlContent.toString(),{
-                accountName:  user.name,
-                accountEmail: user.email,
-                accountPassword: password,
-                logoSrc: 'uniqueLogoSrc'
+        try{
+            await transporter.sendMail({
+                from: 'Solvvo Info', 
+                to: user.email, 
+                subject: "[SOLVVO] Cont nou", // Subject line ,
+                // attachments: [{
+                //     filename: 'helpdesk_logo.png',
+                //     path: path.join(__dirname, '..', '..', 'assets', 'weSolvvoLogoMotto.png'),
+                //     cid: 'uniqueLogoSrc'
+                // }],
+                html: simpleHtmlTemplating(htmlContent.toString(),{
+                    accountName:  user.name,
+                    accountEmail: user.email,
+                    accountPassword: password,
+                    logoSrc: 'uniqueLogoSrc'
+                })
             })
-          });
-          
+        }catch(err){
+            console.log(err)
+            return {}
+        }
+        
         return database.create(user)
     },
     getById: id => database.getById(id),

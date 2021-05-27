@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 module.exports = {
     login : async user => {
         const userFound = await database.getByEmail(user.email)
+       
         if(userFound === null){
             return Helpers.handleResponse(USER_NOT_FOUND, StatusCodes.FORBIDDEN)
         }

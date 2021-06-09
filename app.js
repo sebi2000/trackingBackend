@@ -38,7 +38,7 @@ connection().then( () => {
   app.use('/auth', authRouter)
   app.use('/reset', resetRouter)
   app.use('/tablet', tabletRouter)
-  //app.use(authHandler)
+  app.use(authHandler)
   app.use('/entries', entriesRouter)
   app.use('/isLogged', (req, res) => {
     res.send(req.auth)

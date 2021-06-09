@@ -19,6 +19,7 @@ const authRouter = require('./src/api/auth/router')
 const entriesRouter = require('./src/api/entries/router')
 const resetRouter = require('./src/api/reset/router')
 const tabletRouter = require('./src/api/tablet/router')
+const companiesRouter = require('./src/api/companies/router')
 
 const app = express();
 
@@ -37,11 +38,12 @@ connection().then( () => {
   app.use('/auth', authRouter)
   app.use('/reset', resetRouter)
   app.use('/tablet', tabletRouter)
-  app.use(authHandler)
+  //app.use(authHandler)
   app.use('/entries', entriesRouter)
   app.use('/isLogged', (req, res) => {
     res.send(req.auth)
   })
+  app.use('/companies', companiesRouter)
   app.use('/users', usersRouter)
 
   var job = new CronJob('0 0 18 * * *', function() {

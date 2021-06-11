@@ -3,7 +3,8 @@ module.exports = {
     DATABASE: {
         COLLECTIONS:{
             USERS: 'users',
-            ENTRIES: 'entries'
+            ENTRIES: 'entries',
+            COMPANIES: 'companies'
         },
         URL: 'mongodb://frontdesk-db:27017/usersdb'
     },

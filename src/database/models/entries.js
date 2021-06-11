@@ -8,7 +8,11 @@ const entriesSchema = mongoose.Schema({
     phone: String,
     company: String,
     signature: String,
-    date: Date
+    series: String,
+    number: String,
+    duration: String,
+    date: Date,
+    observations: String
 })
 
 module.exports = mongoose.model(CONSTANTS.DATABASE.COLLECTIONS.ENTRIES, entriesSchema)

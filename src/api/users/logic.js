@@ -8,7 +8,8 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = {
-    getAll: () => database.getAll(),
+    getAll: (page, rows) => Promise.all([database.getAll(page, rows), database.count()]),
+    delete: id => database.delete(id),
     create: async user => {
 
         let password = generator.generate({

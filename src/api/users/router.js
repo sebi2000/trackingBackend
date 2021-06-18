@@ -18,7 +18,7 @@ router.route('/')
         })  
     })
     .get((req,res) => {
-        logic.getAll().then(users => {
+        logic.getAll(req.query.page, req.query.rows).then(users => {
             res.json(users)
         }).catch(err => {
             res.send(err)
@@ -39,6 +39,14 @@ router.route('/:ID')
             res.json(user)
         }).catch(err => {
             res.status(400)
+            res.send(err)
+        })
+    })
+    .delete((req, res) => {
+        logic.delete(req.params.ID).then(resp => {
+            res.send(resp)
+        })
+        .catch(err => {
             res.send(err)
         })
     })
